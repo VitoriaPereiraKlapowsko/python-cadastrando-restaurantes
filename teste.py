@@ -55,6 +55,23 @@ def listar_restaurantes():
         print(f'-> {nome_restaurante} | {categoria} | {ativo}')
 
     voltar_ao_menu_principal()
+
+def alternar_estado_do_restaurante():
+    exibir_subtitulo('Alternando o estado do restaurante')
+    nome_restaurante = input('Digite o nome do restaurante que deseja alternar o estado: ')
+    restaurante_encontrado = False
+    
+    for restaurante in restaurantes:
+        if nome_restaurante == restaurante['nome']:
+            restaurante_encontrado = True
+            restaurante['ativo'] = not restaurante['ativo'] #este not vai servir para inverter o valor, ou seja caso o valor seja como False ele obrigatóriamente vai se tornar um True e se ele for um False ele obrigatoriamente vai se tornar um True
+            mensagem = f'O restautante {nome_restaurante} foi ativado com sucesso!!!' if restaurante['ativo'] else f'O restaurante {nome_restaurante} foi desativado com sucesso' #Conceito de ternário onde coloquei duas possiveis situações uma para caso seja um True e outra caso seja um False
+            print(mensagem)
+            
+    if not restaurante_encontrado:
+        print('O restaurante não foi encontrado')
+    
+    voltar_ao_menu_principal()
     
 def escolher_opcoes():
     try: #vai servir para caso a pessoa tenha digitado uma letra ao invés de um número, ai ele tenta fazer isso se não ele pega a opção inválida
@@ -68,7 +85,7 @@ def escolher_opcoes():
         elif opcao_escolhida == 2 : #Elif é um else if
             listar_restaurantes()
         elif opcao_escolhida == 3 : 
-            print('Ativar Restaurante')
+            alternar_estado_do_restaurante()
         elif opcao_escolhida == 4 : 
             finalizar_app()
         else : 
