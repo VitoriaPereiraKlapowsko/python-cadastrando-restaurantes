@@ -16,7 +16,7 @@ def exibir_nome_do_programa():
 def exibir_opcoes():
     print('1. Cadastrar Restaurante')
     print('2. Listar Restaurantes')
-    print('3. Ativar Restaurante')
+    print('3. Alternar estado do Restaurante')
     print('4. Sair')
     
 def finalizar_app(): #ao inves de usar function eu coloco def
@@ -32,7 +32,10 @@ def opcao_invalida():
     
 def exibir_subtitulo(texto):
     os.system('cls') #importei a biblioteca OS para poder limpar o terminal após terminar de executar o programa
+    linha = '*' * (len(texto)) #len serve para pegar o tamanho e também * multiplicar pela quantidade de elementos que nós temos
+    print(linha)
     print(texto)
+    print(linha)
     print()
        
 def cadastrar_novo_restaurante():
@@ -48,11 +51,12 @@ def cadastrar_novo_restaurante():
 def listar_restaurantes():
     exibir_subtitulo('Lista de novos restaurantes')
     
+    print(f'{'Nome do restaurante'.ljust(22)} | {'Categoria'.ljust(20)} | Status')
     for restaurante in restaurantes:
         nome_restaurante = restaurante['nome'] #pegando as informações colocado lá no dicionário de restaurantes
         categoria = restaurante['categoria']
-        ativo = restaurante['ativo']
-        print(f'-> {nome_restaurante} | {categoria} | {ativo}')
+        ativo = 'ativado' if restaurante['ativo'] else 'desativado'
+        print(f'-> {nome_restaurante.ljust(20)} | {categoria.ljust(20)} | {ativo}') #.ljust(20) serve para colocar um espaçamento entre os itens
 
     voltar_ao_menu_principal()
 
