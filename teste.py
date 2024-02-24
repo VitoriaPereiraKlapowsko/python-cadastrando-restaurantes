@@ -1,6 +1,9 @@
 import os
 
-restaurantes = ['Pizza', 'Sushi']
+#restaurantes = ['Pizza', 'Sushi'] aqui era uma lista
+restaurantes = [{'nome':'Praça', 'categoria':'Japonesa', 'ativo':False}, #aqui estou usando o conceito de dicionário
+                {'nome':'Pizza Suprema', 'categoria':'Pizza', 'ativo':True},
+                {'nome':'Cantina', 'categoria':'Italiano', 'ativo':False}] 
 
 def exibir_nome_do_programa():
     print('''
@@ -35,7 +38,10 @@ def exibir_subtitulo(texto):
 def cadastrar_novo_restaurante():
     exibir_subtitulo('Cadastro de novos restaurantes')
     nome_do_restaurante = input('Digite o nome do restaurante que deseja cadastrar: ')
-    restaurantes.append(nome_do_restaurante) #colocando os restaurantes cadastrados dentro da lista
+    categoria = input(f'Digite o nome da categoria do restairante{nome_do_restaurante}: ')
+    dados_do_restaurante = {'nome':nome_do_restaurante, 'categoria':categoria, 'ativo':False} #Regra de negócio em deixar como False
+    #restaurantes.append(nome_do_restaurante) #colocando os restaurantes cadastrados dentro da lista
+    restaurantes.append(dados_do_restaurante)
     print(f'O restaurante {nome_do_restaurante} foi cadastrado com sucesso!!')
     voltar_ao_menu_principal()
     
@@ -43,7 +49,10 @@ def listar_restaurantes():
     exibir_subtitulo('Lista de novos restaurantes')
     
     for restaurante in restaurantes:
-        print(f'{restaurante}')
+        nome_restaurante = restaurante['nome'] #pegando as informações colocado lá no dicionário de restaurantes
+        categoria = restaurante['categoria']
+        ativo = restaurante['ativo']
+        print(f'-> {nome_restaurante} | {categoria} | {ativo}')
 
     voltar_ao_menu_principal()
     
